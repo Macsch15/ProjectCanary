@@ -1,9 +1,13 @@
 <?php
 
-if (!function_exists('config')) {
-    function config($key)
-    {
+use Canary\Config\Config;
 
+if (!function_exists('config')) {
+    function config($section, $key = null)
+    {
+        $config = new Config();
+
+        return $config->get($section, $key);
     }
 }
 
@@ -14,9 +18,9 @@ if (!function_exists('appRootPath')) {
     }
 }
 
-if (!function_exists('getEnv')) {
-    function getEnv()
+if (!function_exists('getAppEnv')) {
+    function getAppEnv()
     {
-
+        return config('app', 'env');
     }
 }

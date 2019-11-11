@@ -2,7 +2,7 @@
 
 namespace Canary;
 
-use Canary\Providers\TwigProvider;
+use Canary\ServiceProvider\ServiceProvider;
 
 class Application
 {
@@ -11,8 +11,9 @@ class Application
      */
     public function run()
     {
-        $tempView = TwigProvider::register();
+        $tempView = new ServiceProvider();
+        $tempView = $tempView->get('View');
 
-        echo $tempView->render('/frontend/index.twig');
+        $tempView->render('/frontend/index.twig');
     }
 }
