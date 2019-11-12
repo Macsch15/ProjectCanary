@@ -7,13 +7,24 @@ use Twig\Loader\FilesystemLoader;
 
 class View
 {
-    public function render($data)
+    /**
+     * Render view
+     *
+     * @param $template
+     * @param array $variables
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function render($template, array $variables = []) : void
     {
         $loader = new FilesystemLoader(appRootPath() . '/resources/view');
         $twig = new Environment($loader, [
-            'cache' => false /* appRootPath() . '/cache' */
+            'cache' => (inDev() === true ? false : appRootPath() . '/' . config('app', 'cache_path')),
+            'debug' => inDev() === true,
+            'strict_variables' => inDev() === true
         ]);
 
-        $twig->display($data);
+        $twig->display($template, $variables);
     }
 }

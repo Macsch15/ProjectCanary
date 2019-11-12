@@ -24,3 +24,12 @@ if (!function_exists('getAppEnv')) {
         return config('app', 'env');
     }
 }
+
+if (!function_exists('inDev')) {
+    function inDev()
+    {
+        $devEnv = ['dev', 'local', 'development'];
+
+        return in_array(getAppEnv(), $devEnv, true) === true;
+    }
+}
