@@ -2,5 +2,6 @@
 
 return [
     'env' => 'dev',
-    'cache_path' => 'storage'
+    'cache_path' => 'storage',
+    'sentry_dsn' => ''
 ];
